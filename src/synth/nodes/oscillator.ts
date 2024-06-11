@@ -1,9 +1,9 @@
-import type { Note } from "../constants/notes";
+import type { NotesEnum } from "../constants/notes";
 import type { Shape } from "../constants/shapes";
 import type { ConnectionMapping, RelationKey, SynthAudioNode } from "./synthnode";
 
 export interface SynthOscillatorParams {
-    frequency: number | Note;
+    frequency: number | NotesEnum;
     gain: number;
     detune: number;
     shape: Shape;

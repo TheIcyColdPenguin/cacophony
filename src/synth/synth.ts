@@ -1,3 +1,4 @@
+import { genId } from "../util/genid";
 import { SynthDestination } from "./nodes/destination";
 import { SynthOscillator, type SynthOscillatorParams } from "./nodes/oscillator";
 import type { SynthAudioNode } from "./nodes/synthnode";
@@ -45,21 +46,10 @@ export class Synth {
     }
 
     addNode(node: SynthAudioNode): number {
-        const id = this.genId();
+        const id = genId((maybeId) => this.elems.has(maybeId));
         node.id = id;
         node.elems = this.elems;
         this.elems.set(id, node);
-        return id;
-    }
-
-    genId(): number {
-        let id;
-
-        do {
-            // not-so-great pseudorandom number gen
-            id = new Date().valueOf() + Math.floor(100 * Math.random());
-        } while (this.elems.has(id));
-
         return id;
     }
 }
